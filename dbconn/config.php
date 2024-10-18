@@ -11,10 +11,3 @@
    if($conn->connect_error){
       die("Conneciton failed:".$conn->connect_error);
    }
-
-
-
-
-
-
-
