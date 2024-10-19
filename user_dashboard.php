@@ -20,13 +20,13 @@ include 'dbconn/authentication.php';
 <body class="flex bg-gray-100 ">
 
   <!-- Sidebar -->
-<?php include('disc/_partials/sidebar.php');?>
+<?php include('disc/_partials/user/sidebar.php');?>
 
   <!-- Main Content with Navbar -->
   <div class="w-full flex flex-col ">
     
     <!-- Top Navbar -->
-    <?php include('disc/_partials/navbar.php'); ?>
+    <?php include('disc/_partials/user/navbar.php'); ?>
 
     <!-- Main Content Area -->
     <main id="mainContent" class="w-full">

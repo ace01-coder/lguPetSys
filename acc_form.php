@@ -7,65 +7,33 @@ function generateToken() {
     return bin2hex(random_bytes(32));
 }
 
-if (isset($_POST['btn-ruser'])) {
-
-
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get form data
     $username = $_POST['uname'];
     $email = $_POST['mail'];
     $password = $_POST['pass'];
-    $rpassword = $_POST['rpass'];
     $role = $_POST['role'];
 
-    // Input validation
-    if (empty($username) || empty($email) || empty($password) || empty($rpassword) || empty($role)) {
-        header('Location: acc_form.php?error=emptyfield&uname=' . $username . '&mail=' . $email);
-        exit();
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header('Location: acc_form.php?error=invalidemail&uname=' . $username);
-        exit();
-    } elseif (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
-        header('Location: acc_form.php?error=invaliduname&mail=' . $email);
-        exit();
-    } elseif ($password !== $rpassword) {
-        header('Location: acc_form.php?error=passwordcheck&uname=' . $username . '&mail=' . $email);
-        exit();
-    }
+    // Simple validation
+    if (!empty($username) && !empty($email) && !empty($password) && !empty($role)) {
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Check if the username already exists in the database
-    $sql = "SELECT username FROM users WHERE username=?";
-    $stmt = mysqli_stmt_init($conn);
+        // Insert the user into the database
+        $sql = "INSERT INTO users (username, email, pwd, role) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssss", $username, $email, $hashed_password, $role);
 
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header('Location: acc_form.php?error=sqlerror');
-        exit();
-    } else {
-        mysqli_stmt_bind_param($stmt, "s", $username);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_store_result($stmt);
-
-        $resultCheck = mysqli_stmt_num_rows($stmt);
-
-        if ($resultCheck > 0) {
-            header('Location: acc_form.php?error=usernametaken&mail=' . $email);
-            exit();
+        if ($stmt->execute()) {
+            echo "Account created successfully!";
         } else {
-            // Insert new user into the database
-            $sql = "INSERT INTO users (username, email, pwd, role) VALUES (?, ?, ?, ?)";
-            
-            if (!mysqli_stmt_prepare($stmt, $sql)) {
-                header('Location: acc_form.php?error=sqlerror');
-                exit();
-            } else {
-                // Hash password before storing it
-                $hashpassword = password_hash($password, PASSWORD_DEFAULT);
-                mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $hashpassword, $role);
-                mysqli_stmt_execute($stmt);
-                header('Location: acc_form.php?useradd=success');
-                exit();
-            }
+            echo "Error: " . $stmt->error;
         }
-    }
 
+        $stmt->close();
+    } else {
+        echo "All fields are required!";
+    }
 }
 
 ?>
@@ -77,38 +45,56 @@ if (isset($_POST['btn-ruser'])) {
 </div>
 <div class="">
 
-    <div class="p-10">
-          <!--form-->
-        <form action="account_add_pg.php" method="post">
-               <div class="m-4">
-               <label for="username">Username</label>
-               <input  class="border px-12" type="text" name="uname">
-               </div>
-                <div class="m-4">
-                    <label for="mail">E-mail</label>
-                    <input  class="border px-12" type="text" name="mail">
-                </div>
-                <div class="m-4">
-                    <label for="password">Password</label>
-                    <input  class="border px-12" type="password" name="pass">
-                </div>
-                <div class="m-4">
-                    <label for="password">Confirm Password</label>
-                    <input  class="border px-12" type="password" name="rpass">
-                </div>
-            </div>
-            <label for="role">Role:</label>
-           <select name="role" id="role">
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
+<div class="max-w-lg mx-auto p-10 bg-white rounded-lg shadow-lg">
+    <!--form-->
+    <form action="" method="post">
+        <!-- Username -->
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+            <input class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                type="text" name="uname" placeholder="Enter username" required>
+        </div>
+
+        <!-- E-mail -->
+        <div class="mb-4">
+            <label for="mail" class="block text-sm font-medium text-gray-700">E-mail</label>
+            <input class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                type="email" name="mail" placeholder="Enter your email" required>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                type="password" name="pass" placeholder="Enter password" required>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-4">
+            <label for="rpass" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <input class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                type="password" name="rpass" placeholder="Re-enter password" required>
+        </div>
+
+        <!-- Role Selection -->
+        <div class="mb-4">
+            <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+            <select name="role" id="role" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
             </select>
-            <div class="">
-                <button type="submit" name="btn-ruser">
-                    add user
-                </button>
-            </div>
-        </form>
-    </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" name="btn-ruser" class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                Add User
+            </button>
+        </div>
+    </form>
+    <a href="account_mgt.php">back</a>
+</div>
+
 
 </div>
 </section>

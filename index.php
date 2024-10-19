@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('dbconn/config.php');
+
 // Function to generate CSRF token
 function generateToken(){
     return bin2hex(random_bytes(32));
@@ -36,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // If no errors, proceed to account check
     if (empty($error)) {
         // Check if the account exists
-        $stmt = $conn->prepare('SELECT id, pwd, role FROM users WHERE username=? OR email=?');
-        $stmt->bind_param('ss', $umail, $umail);
+        $stmt = $conn->prepare('SELECT id, username, pwd, role FROM users WHERE username=? OR email=?');
+        $stmt->bind_param('ss', $umail, $umail, );
         $stmt->execute();
         $stmt->store_result();
 
@@ -46,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error['account'] = 'Account not found.';
         } else {
             // If account is found, fetch user details
-            $stmt->bind_result($id, $hpassword, $role);
+            $stmt->bind_result($id, $username, $hpassword, $role);
             $stmt->fetch();
 
             // Verify the password
@@ -61,16 +62,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($role === 'admin') {
                     header("Location: admin_dashboard.php");
                     exit;
-                } else {
+                } elseif ($role === 'user') {
                     header("Location: user_dashboard.php");
+                    exit;
+                } else {
+                    header("Location: index.php?error");
                     exit;
                 }
             } else {
-                $error = 'Incorrect password. Please try again.';
-        
-            exit();
+                $error['password'] = 'Incorrect password. Please try again.';
             }
         }
+        $stmt->close();
     }
 }
 ?>
@@ -83,13 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
 </head>
 <body class="flex items-center justify-center h-screen bg-blue-100">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div class="flex justify-center">
-            <img src="code/img/barangay.png" alt="Logo" class="">
+            <img src="img/barangay.png" alt="Logo" class="">
         </div>
 
         <?php if (!empty($error)) : ?>
@@ -112,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="mb-6">
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" name="password" id="password" class="mt-1 p-2 border border-gray-300 rounded w-full" value = "<?php echo isset($_POST['password']) ? htmlspecialchars($_POST['password']) : ''; ?>" autocomplete="off">
+                <input type="password" name="password" id="password" class="mt-1 p-2 border border-gray-300 rounded w-full" value="<?php echo isset($_POST['password']) ? htmlspecialchars($_POST['password']) : ''; ?>" autocomplete="off">
             </div>
 
             <div class="flex justify-center">
@@ -121,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </div>
     <script>
-            window.onload = function() {
+        window.onload = function() {
             document.getElementById('loginForm').reset();
         };
     </script>

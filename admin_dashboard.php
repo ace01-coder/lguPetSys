@@ -22,18 +22,18 @@ include 'dbconn/authentication.php';
 <body class="flex bg-gray-100 ">
 
   <!-- Sidebar -->
-<?php include('disc/_partials/admin-sidebar.php');?>
+<?php include('disc/_partials/admin/admin-sidebar.php');?>
 
   <!-- Main Content with Navbar -->
-  <div class="w-full grid grid-cols-1">
+  <div class="w-full mx-4">
     
     <!-- Top Navbar -->
-    <?php include('disc/_partials/navbar.php'); ?>
+    <?php include('disc/_partials/admin/admin-navbar.php'); ?>
 
     <!-- Main Content Area -->
     <main id="mainContent" class="">
       <?php
-       include('disc/_partials/admin-dashboard.php');
+       include('disc/_partials/admin/admin-dashboard.php');
       ?>
     </main>
   </div>

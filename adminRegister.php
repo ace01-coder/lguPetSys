@@ -20,17 +20,25 @@ include 'dbconn/authentication.php';
 <body class="flex bg-gray-100 ">
 
   <!-- Sidebar -->
-<?php include('disc/_partials/admin-sidebar.php');?>
+<?php include('disc/_partials/admin/admin-sidebar.php');?>
 
   <!-- Main Content with Navbar -->
-  <div class="w-full">
+  <div class="w-full mx-4">
     
     <!-- Top Navbar -->
-    <?php include('disc/_partials/admin-navbar.php'); ?>
+    <?php include('disc/_partials/admin/admin-navbar.php'); ?>
 
     <!-- Main Content Area -->
-    <main id="mainContent" class="m-4">
-    <div class="overflow-x-auto">
+    <main id="mainContent" class="">
+    <div class="overflow-x-auto bg-white shadow p-10 rounded-lg">
+    <h2 class="text-xl font-semibold mb-4 text-center"><i class="fas fa-user w-5 h-5 mr-2"></i>Account Management</h2>
+               <div class="flex justify-between py-4">
+                <div class="">
+                  <input class="border p-2 rounded-lg" type="text">
+                  <button class="bg-blue-500 p-2 rounded-lg hover:text-white" >Search</button>
+                </div>
+              
+               </div>
         <table id="petTable" class="min-w-full bg-white border border-gray-200 rounded-lg">
           <thead>
             <tr class="text-left bg-gray-100">

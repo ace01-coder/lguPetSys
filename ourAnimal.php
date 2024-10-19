@@ -19,7 +19,7 @@ include 'dbconn/authentication.php';
 
   <!-- Sidebar -->
 <?php
-  include('disc/_partials/sidebar.php');
+  include('disc/_partials/user/sidebar.php');
  ?>
 
   <!-- Main Content with Navbar -->
@@ -27,13 +27,13 @@ include 'dbconn/authentication.php';
     
     <!-- Top Navbar -->
  <?php
-  include('disc/_partials/navbar.php');
+  include('disc/_partials/user/navbar.php');
  ?>
 
     <!-- Main Content Area -->
     <main id="mainContent" class="p-8">
      <?php
-      include('disc/_partials/ouranimalCard.php');
+      include('disc/_partials/user/ouranimalCard.php');
      ?>
     </main>
   </div>

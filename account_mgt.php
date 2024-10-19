@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('dbconn/config.php');
+include('dbconn/config.php');
 include 'dbconn/authentication.php';
 
 
@@ -35,12 +35,13 @@ include 'dbconn/authentication.php';
     <main id="mainContent" class="">
     <div class="flex justify-center bg-white shadow-md rounded-lg p-6">
             <div class="w-full">
-                <h2 class="text-xl font-semibold mb-4 text-center"><i class="fas fa-user w-5 h-5 mr-2"></i>Report Management</h2>
+                <h2 class="text-xl font-semibold mb-4 text-center"><i class="fas fa-user w-5 h-5 mr-2"></i>Account Management</h2>
                <div class="flex justify-between py-4">
                 <div class="">
                   <input class="border p-2 rounded-lg" type="text">
                   <button class="bg-blue-500 p-2 rounded-lg hover:text-white" >Search</button>
                 </div>
+                <a href="acc_form" class="bg-blue-500 p-2 rounded-lg hover:text-white" >Add Account</a>
                </div>
                 <table class="min-w-full border border-gray-300">
                     <thead>
@@ -89,8 +90,53 @@ include 'dbconn/authentication.php';
                         }
                       
                         ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </main>
   </div>
+
+  <!--modal form-->
+  <div id="accountModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-96 relative">
+            <!-- Close Button -->
+            <span class="close absolute top-2 right-2 text-gray-500 cursor-pointer hover:text-black">&times;</span>
+
+            <!-- Modal Content -->
+            <h2 class="text-2xl font-semibold mb-6 text-center">Create Your Account</h2>
+            <form id="createAccountForm" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="username" name="username" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                </div>
+
+                <!-- Role Selection -->
+                <div>
+                    <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+                    <select id="role" name="role" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700">
+                    Create Account
+                </button>
+            </form>
+        </div>
+    </div>
 
   <script src="codejs/script.js"></script>
   <script src="codejs/script-admin.js" ></script>

@@ -1,8 +1,7 @@
 <?php
 session_start();
 include 'dbconn/authentication.php';
-include 'dbconn/config.php.php';
-
+include 'dbconn/config.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $error = array();
@@ -121,12 +120,12 @@ $conn->close();
 <body class="flex bg-gray-300">
 
   <!-- Sidebar -->
-  <?php include ('disc/_partials/sidebar.php'); ?>
+  <?php include ('disc/_partials/user/sidebar.php'); ?>
 
   <!-- Main Content with Navbar -->
   <div class="flex-1 flex flex-col">
     <!-- Top Navbar -->
-    <?php include ('disc/_partials/navbar.php'); ?>
+    <?php include ('disc/_partials/user/navbar.php'); ?>
 
     <!-- Main Content Area -->
     <main id="mainContent" class="p-8">

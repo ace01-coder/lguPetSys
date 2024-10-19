@@ -13,9 +13,6 @@ include 'dbconn/authentication.php';
 </head>
 <body class="bg-gray-100 ">
   <div class="flex ">
-  <?php
-     
- ?>
   <div class=" mx-2">
      <div class="flex m-2 justify-between">
      <div class="flex m-4">
@@ -23,7 +20,7 @@ include 'dbconn/authentication.php';
         <button class="bg-blue-500 rounded-lg px-4" type="submit">search</button>
       </div>
       <div class="flex m-4">
-        <button class="bg-"><a href="add_form_pg.php"></a></button>
+        <button class="bg-"><a href="add_form_pg.php">Add Users</a></button>
       </div>
      </div>
       <table class="bg-white rounded-lg shadow-lg w-full ">
