@@ -1,7 +1,9 @@
 <?php
 session_start();
+include ('dbconn/config.php');
 include 'dbconn/authentication.php';
-include('dbconn/config.php');
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,36 +32,35 @@ include('dbconn/config.php');
     <?php include('disc/_partials/admin/admin-navbar.php'); ?>
 
     <!-- Main Content Area -->
-    <main id="mainContent" class="">
+    <main id="mainContent" class="w-full">
     <div class="flex justify-center bg-white shadow-md rounded-lg p-6">
     <div class="w-full">
-        <h2 class="text-xl font-semibold mb-4 text-center"><i class="fas fa-user w-5 h-5 mr-2"></i>Registration Pet Management</h2>
+        <h2 class="text-xl font-semibold mb-4 text-center"><i class="fas fa-user w-5 h-5 mr-2"></i>Report Management</h2>
         <div class="flex justify-between py-4">
             <div class="">
                 <input class="border p-2 rounded-lg" type="text" placeholder="Search...">
                 <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Search</button>
             </div>
         </div>
-        <table class="min-w-full border border-gray-300">
+        <table class="w-64 border border-gray-300">
             <thead>
                 <tr class="bg-gray-100">
                     <th class="py-2 px-4 border text-center">ID</th>
-                    <th class="py-2 px-4 border text-center">Owner Name</th>
-                    <th class="py-2 px-4 border text-center">Pet Name</th>
-                    <th class="py-2 px-4 border text-center">Pet Age</th>
-                    <th class="py-2 px-4 border text-center">Pet Breed</th>
+                    <th class="py-2 px-4 border text-center">Name</th>
+                    <th class="py-2 px-4 border text-center">Email</th>
+                    <th class="py-2 px-4 border text-center">Phone</th>
                     <th class="py-2 px-4 border text-center">Address</th>
-                    <th class="py-2 px-4 border text-center">Pet Image</th>
-                    <th class="py-2 px-4 border text-center">Vaccine Record</th>
-                    <th class="py-2 px-4 border text-center">Additional Information</th>
-                    <th class="py-2 px-4 border text-center">Actions</th>
-                  
+                    <th class="py-2 px-4 border text-center">Pet Name</th>
+                    <th class="py-2 px-4 border text-center">Pet Type</th>
+                    <th class="py-2 px-4 border text-center">Reason</th>
+                    <th class="py-2 px-4 border text-center">Experience</th>
+                    <th class="py-2 px-4 border text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 // Fetch user data from the database
-                $sql = "SELECT * FROM registrations"; // Adjust 'registrations' to your actual table name
+                $sql = "SELECT * FROM adoptions"; // Adjust 'registrations' to your actual table name
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -67,16 +68,14 @@ include('dbconn/config.php');
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>"; // Start a new table row
                         echo "<td class='py-2 px-4 border text-center'>" . $row['id'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['owner_name'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['pet_name'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['pet_age'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['pet_breed'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['name'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['email'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['phone'] . "</td>";
                         echo "<td class='py-2 px-4 border text-center'>" . $row['address'] . "</td>";
-                        // Show pet image as a clickable image
-                        echo "<td class='py-2 px-4 border text-center'><a href='" . htmlspecialchars($row['pet_image']) . "' target='_blank'><img src='" . htmlspecialchars($row['pet_image']) . "' alt='Pet Image' class='w-16 h-16 object-cover rounded'></a></td>";
-                        // Show vaccine record as a text link
-                        echo "<td class='py-2 px-4 border text-center'><a href='" . htmlspecialchars($row['vaccine_record']) . "' target='_blank'>" . htmlspecialchars($row['vaccine_record']) . "</a></td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['additional_info'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['pet_name'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['pet_type'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['reason'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['experience'] . "</td>";
                         // Add Action Buttons
                         echo "<td class='py-2 px-4 border text-center'>";
                         echo "<a href='update.php?id=" . $row['id'] . "' class='bg-yellow-500 text-white p-1 rounded-lg hover:bg-yellow-600'>Update</a>";

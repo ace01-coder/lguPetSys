@@ -32,63 +32,72 @@ include 'dbconn/authentication.php';
     <?php include('disc/_partials/admin/admin-navbar.php'); ?>
 
     <!-- Main Content Area -->
-    <main id="mainContent" class="">
+    <main id="mainContent" class="w-full">
     <div class="flex justify-center bg-white shadow-md rounded-lg p-6">
-            <div class="w-full">
-                <h2 class="text-xl font-semibold mb-4 text-center"><i class="fas fa-user w-5 h-5 mr-2"></i>Report Management</h2>
-               <div class="flex justify-between py-4">
-                <div class="">
-                  <input class="border p-2 rounded-lg" type="text">
-                  <button class="bg-blue-500 p-2 rounded-lg hover:text-white" >Search</button>
-                </div>
-               </div>
-                <table class="min-w-full border border-gray-300">
-                    <thead>
-                        <tr class="bg-gray-100">
-                            <th class="py-2 px-4 border text-center">ID</th>
-                            <th class="py-2 px-4 border text-center">Name</th>
-                            <th class="py-2 px-4 border text-center">Email</th>
-                            <th class="py-2 px-4 border text-center">Role</th>
-                            <th class="py-2 px-4 border text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+    <div class="w-full">
+        <h2 class="text-xl font-semibold mb-4 text-center"><i class="fas fa-user w-5 h-5 mr-2"></i>Report Management</h2>
+        <div class="flex justify-between py-4">
+            <div class="">
+                <input class="border p-2 rounded-lg" type="text" placeholder="Search...">
+                <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Search</button>
+            </div>
+        </div>
+        <table class="w-64 border border-gray-300">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="py-2 px-4 border text-center">ID</th>
+                    <th class="py-2 px-4 border text-center">Report Party</th>
+                    <th class="py-2 px-4 border text-center">Phone</th>
+                    <th class="py-2 px-4 border text-center">Email</th>
+                    <th class="py-2 px-4 border text-center">Species</th>
+                    <th class="py-2 px-4 border text-center">Breed</th>
+                    <th class="py-2 px-4 border text-center">age</th>
+                    <th class="py-2 px-4 border text-center">Number of Involve</th>
+                    <th class="py-2 px-4 border text-center">Type of Abuse</th>
+                    <th class="py-2 px-4 border text-center">Description</th>
+                    <th class="py-2 px-4 border text-center">Evidence</th>
+                    <th class="py-2 px-4 border text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Fetch user data from the database
+                $sql = "SELECT * FROM reports"; // Adjust 'registrations' to your actual table name
+                $result = $conn->query($sql);
 
-// Fetch user data from the database
-                         $sql = "SELECT id, username, email, role FROM users "; // Adjust 'users' to your actual table                          name
-                         $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    // Loop through each row and output data
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>"; // Start a new table row
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['id'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['report_party'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['phone'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['email'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['species'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['breed'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['age'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['number'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['abuse_nature'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['description'] . "</td>";
+                        // Show pet image as a clickable image
+                        echo "<td class='py-2 px-4 border text-center'><a href='" . htmlspecialchars($row['evidence']) . "' target='_blank'><img src='" . htmlspecialchars($row['evidence']) . "' alt='Pet Image' class='w-16 h-16 object-cover rounded'></a></td>";
+                        // Add Action Buttons
+                        echo "<td class='py-2 px-4 border text-center'>";
+                        echo "<a href='update.php?id=" . $row['id'] . "' class='bg-yellow-500 text-white p-1 rounded-lg hover:bg-yellow-600'>Update</a>";
+                        echo "<span></span>";
+                        echo "<a href='delete.php?id=" . $row['id'] . "' class='bg-red-500 text-white p-1 rounded-lg hover:bg-red-600' onclick='return confirm(\"Are you sure you want to delete this record?\");'>Delete</a>";
+                        echo "</td>";
+                        echo "</tr>"; // End the table row
+                    }
+                } else {
+                    echo "<tr><td colspan='10' class='py-2 px-4 border text-center'>No users found</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-                        if ($result->num_rows > 0) {
-                            
-                            $userTypeColors = [
-                                'admin' => 'bg-yellow-200', 
-                                'user' => 'bg-blue-200',    
-                            ];
-
-                            
-                            while ($row = $result->fetch_assoc()) {
-                                
-                                $rowClass = isset($userTypeColors[$row['role']]) ? $userTypeColors[$row['role']] : 'bg-gray-200'; // Default color if user type is not defined
-
-                                
-                                echo "<tr class='$rowClass'>"; // Apply the background color class to the table row
-                                echo "<td class='py-2 px-4 border text-center'>" . $row['id'] . "</td>";
-                                echo "<td class='py-2 px-4 border text-center'>" . $row['username'] . "</td>";
-                                echo "<td class='py-2 px-4 border text-center'>" . $row['email'] . "</td>";
-                                echo "<td class='py-2 px-4 border text-center'>" . $row['role'] . "</td>";
-                                echo "<td class='py-2 px-4 border text-center'>
-                                        <a href='update.php?id=" . $row['id'] . "' class='text-blue-500 hover:underline'>Edit</a> | 
-                                        <a href='deleteuseradmin.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this account?\");' class='text-red-500 hover:underline'>Delete</a>
-                                      </td>";
-                                echo "</tr>";
-                            }
-                        } else {
-                            
-                            echo "<tr><td colspan='8' class='py-2 px-4 border text-center'>No users found</td></tr>";
-                        }
-                      
-                        ?>
     </main>
   </div>
 

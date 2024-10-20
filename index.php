@@ -88,8 +88,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="disc/css/style.css">
+    <style>
+        body{
+             background-image: url(img/animal_welfare.jpg);
+             background-position: center;
+             background-repeat: no-repeat;
+             background-size: cover;
+        }
+    </style>
 </head>
-<body class="flex items-center justify-center h-screen bg-blue-100">
+<body class="flex items-center justify-center h-screen ">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div class="flex justify-center">
             <img src="img/barangay.png" alt="Logo" class="">

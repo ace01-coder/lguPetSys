@@ -1,8 +1,4 @@
 
-
-
-
-
 //card container-start
 /*function showPopup(title, description) {
   // Show overlay
