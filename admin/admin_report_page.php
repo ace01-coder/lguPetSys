@@ -23,13 +23,13 @@ include 'dbconn/authentication.php';
 <body class="flex bg-gray-100 ">
 
   <!-- Sidebar -->
-<?php include('disc/_partials/admin/admin-sidebar.php');?>
+<?php include('disc/partials/admin_sidebar.php');?>
 
   <!-- Main Content with Navbar -->
   <div class="w-full mx-4">
     
     <!-- Top Navbar -->
-    <?php include('disc/_partials/admin/admin-navbar.php'); ?>
+    <?php include('disc/partials/admin_navbar.php'); ?>
 
     <!-- Main Content Area -->
     <main id="mainContent" class="w-full">
@@ -46,21 +46,23 @@ include 'dbconn/authentication.php';
             <thead>
                 <tr class="bg-gray-100">
                     <th class="py-2 px-4 border text-center">ID</th>
-                    <th class="py-2 px-4 border text-center">Name</th>
-                    <th class="py-2 px-4 border text-center">Email</th>
+                    <th class="py-2 px-4 border text-center">Report Party</th>
                     <th class="py-2 px-4 border text-center">Phone</th>
-                    <th class="py-2 px-4 border text-center">Address</th>
-                    <th class="py-2 px-4 border text-center">Pet Name</th>
-                    <th class="py-2 px-4 border text-center">Pet Type</th>
-                    <th class="py-2 px-4 border text-center">Reason</th>
-                    <th class="py-2 px-4 border text-center">Experience</th>
+                    <th class="py-2 px-4 border text-center">Email</th>
+                    <th class="py-2 px-4 border text-center">Species</th>
+                    <th class="py-2 px-4 border text-center">Breed</th>
+                    <th class="py-2 px-4 border text-center">age</th>
+                    <th class="py-2 px-4 border text-center">Number of Involve</th>
+                    <th class="py-2 px-4 border text-center">Type of Abuse</th>
+                    <th class="py-2 px-4 border text-center">Description</th>
+                    <th class="py-2 px-4 border text-center">Evidence</th>
                     <th class="py-2 px-4 border text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 // Fetch user data from the database
-                $sql = "SELECT * FROM adoptions"; // Adjust 'registrations' to your actual table name
+                $sql = "SELECT * FROM reports"; // Adjust 'registrations' to your actual table name
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -68,14 +70,17 @@ include 'dbconn/authentication.php';
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>"; // Start a new table row
                         echo "<td class='py-2 px-4 border text-center'>" . $row['id'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['name'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['email'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['report_party'] . "</td>";
                         echo "<td class='py-2 px-4 border text-center'>" . $row['phone'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['address'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['pet_name'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['pet_type'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['reason'] . "</td>";
-                        echo "<td class='py-2 px-4 border text-center'>" . $row['experience'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['email'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['species'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['breed'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['age'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['number'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['abuse_nature'] . "</td>";
+                        echo "<td class='py-2 px-4 border text-center'>" . $row['description'] . "</td>";
+                        // Show pet image as a clickable image
+                        echo "<td class='py-2 px-4 border text-center'><a href='" . htmlspecialchars($row['evidence']) . "' target='_blank'><img src='" . htmlspecialchars($row['evidence']) . "' alt='Pet Image' class='w-16 h-16 object-cover rounded'></a></td>";
                         // Add Action Buttons
                         echo "<td class='py-2 px-4 border text-center'>";
                         echo "<a href='update.php?id=" . $row['id'] . "' class='bg-yellow-500 text-white p-1 rounded-lg hover:bg-yellow-600'>Update</a>";

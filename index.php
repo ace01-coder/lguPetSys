@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('dbconn/config.php');
+include('admin/dbconn/config.php');
 
 // Function to generate CSRF token
 function generateToken(){
@@ -60,14 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
                 // Redirect based on role
                 if ($role === 'admin') {
-                    header("Location: admin_dashboard.php");
+                    header("Location: admin/admin_dashboard_page.php");
                     exit;
                 } elseif ($role === 'user') {
-                    header("Location: user_dashboard.php");
+                    header("Location: user/user_dashboard_page.php");
                     exit;
                 } else {
-                    header("Location: index.php?error");
-                    exit;
+                    $error['role'] = 'No Account.Please request account to barangay';
                 }
             } else {
                 $error['password'] = 'Incorrect password. Please try again.';
@@ -91,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="disc/css/style.css">
     <style>
         body{
-             background-image: url(img/animal_welfare.jpg);
+             background-image: url(admin/img/animal_welfare.jpg);
              background-position: center;
              background-repeat: no-repeat;
              background-size: cover;
@@ -101,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class="flex items-center justify-center h-screen ">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div class="flex justify-center">
-            <img src="img/barangay.png" alt="Logo" class="">
+            <img src="admin/img/barangay.png" alt="Logo" class="">
         </div>
 
         <?php if (!empty($error)) : ?>

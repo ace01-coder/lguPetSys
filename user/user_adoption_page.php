@@ -99,12 +99,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class="flex">
 
   <!-- Sidebar -->
-  <?php include ('disc/_partials/user/sidebar.php'); ?>
+  <?php include ('disc/partials/sidebar.php'); ?>
 
   <!-- Main Content with Navbar -->
   <div class="flex-1 flex flex-col">
     <!-- Top Navbar -->
-    <?php include('disc/_partials/user/navbar.php'); ?>
+    <?php include('disc/partials/navbar.php'); ?>
 
     <!-- Main Content Area -->
     <main id="mainContent" class="p-8">
@@ -179,6 +179,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </main>
   </div>
 
-  <script src="codejs/script.js"></script>
+  <script src="dsic/js/script.js"></script>
 </body>
 </html>
