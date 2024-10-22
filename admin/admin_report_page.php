@@ -42,7 +42,7 @@ include 'dbconn/authentication.php';
                 <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Search</button>
             </div>
         </div>
-        <table class="w-64 border border-gray-300">
+        <table class="w-64 border border-gray-300 ">
             <thead>
                 <tr class="bg-gray-100">
                     <th class="py-2 px-4 border text-center">ID</th>
@@ -56,7 +56,6 @@ include 'dbconn/authentication.php';
                     <th class="py-2 px-4 border text-center">Type of Abuse</th>
                     <th class="py-2 px-4 border text-center">Description</th>
                     <th class="py-2 px-4 border text-center">Evidence</th>
-                    <th class="py-2 px-4 border text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,12 +80,6 @@ include 'dbconn/authentication.php';
                         echo "<td class='py-2 px-4 border text-center'>" . $row['description'] . "</td>";
                         // Show pet image as a clickable image
                         echo "<td class='py-2 px-4 border text-center'><a href='" . htmlspecialchars($row['evidence']) . "' target='_blank'><img src='" . htmlspecialchars($row['evidence']) . "' alt='Pet Image' class='w-16 h-16 object-cover rounded'></a></td>";
-                        // Add Action Buttons
-                        echo "<td class='py-2 px-4 border text-center'>";
-                        echo "<a href='update.php?id=" . $row['id'] . "' class='bg-yellow-500 text-white p-1 rounded-lg hover:bg-yellow-600'>Update</a>";
-                        echo "<span></span>";
-                        echo "<a href='delete.php?id=" . $row['id'] . "' class='bg-red-500 text-white p-1 rounded-lg hover:bg-red-600' onclick='return confirm(\"Are you sure you want to delete this record?\");'>Delete</a>";
-                        echo "</td>";
                         echo "</tr>"; // End the table row
                     }
                 } else {

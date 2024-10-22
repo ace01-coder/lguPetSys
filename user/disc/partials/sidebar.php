@@ -1,7 +1,7 @@
 <div id="sidebar" class="bg-blue-600 text-white w-64 transition-width duration-300 min-h-screen flex flex-col sidebar-expanded">
     <div class="flex justify-center ">
       <div class="flex justify-center p-4 ">
-        <img width="100" height="100"  src="img/logo2.png" alt="">
+        <img width="100" height="100"  src="img/barangay.png" alt="">
       </div>
       <button id="toggleBtn" class="text-white p-1 focus:outline-none md:hidden">
         <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
