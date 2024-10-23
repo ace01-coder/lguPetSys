@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check for errors before database insertion
     if (empty($error)) {
-        $sql = "INSERT INTO registrations (owner_name, pet_name, pet_age, pet_breed, address, pet_image, vaccine_record, additional_info) 
+        $sql = "INSERT INTO register (owner, pet, age, breed, address, pet_image, vaccine_record, additional_info) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($sql);
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($stmt->execute()) {
             echo "<script>
             alert('Registration successfully submitted');
-            window.location.href = 'register.php';
+            window.location.href = 'user_register_page.php';
             </script>";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;

@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if there are no errors before inserting into the database
     if (empty($error)) {
         // Prepare the SQL statement
-        $sql = "INSERT INTO reports (report_party, phone, email, species, breed, age, number, abuse_nature, description, evidence) 
+        $sql = "INSERT INTO report (name, phone, email, species, breed, age, numabuse, typeabuse, description, evidence) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $conn->prepare($sql);
@@ -94,12 +94,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (move_uploaded_file($_FILES['imgInput']['tmp_name'], $targetFile)) {
                 echo "<script>
                 alert('Report successfully submitted');
-                window.location.href = 'report.php';
+                window.location.href = 'user_report_page.php';
                 </script>";
             } else {
                 echo "<script>
                 alert('Error uploading evidence file.');
-                window.location.href = 'report.php';
+                window.location.href = 'user_report_page.php';
                 </script>";
             }
         } else {
