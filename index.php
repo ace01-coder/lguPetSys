@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('admin/dbconn/config.php');
+include('PetLgu/admin/dbconn/config.php');
 
 // Function to generate CSRF token
 function generateToken(){
@@ -60,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
                 // Redirect based on role
                 if ($role === 'admin') {
-                    header("Location: admin/admin_dashboard_page.php");
+                    header("Location: PetLgu/admin/admin_dashboard_page.php");
                     exit;
                 } elseif ($role === 'user') {
-                    header("Location: user/user_dashboard_page.php");
+                    header("Location: PetLgu/user/user_dashboard_page.php");
                     exit;
                 } else {
                     $error['role'] = 'No Account.Please request account to barangay';
