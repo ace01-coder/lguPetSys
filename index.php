@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('PetLgu/admin/dbconn/config.php');
+include('admin/dbconn/config.php');
 
 // Function to generate CSRF token
 function generateToken(){
