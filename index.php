@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="shortcut icon" href="admin/img/barangay.png" type="image/x-icon">
     <style>
         body{
-             background-image: url(admin/img/animal_welfare.jpg);
+             background-image: url(PetLgu/admin/img/animal_welfare.jpg);
              background-position: center;
              background-repeat: no-repeat;
              background-size: cover;
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class="flex items-center justify-center h-screen ">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div class="flex justify-center">
-            <img src="admin/img/barangay.png" alt="Logo" class="">
+            <img src="PetLgu/admin/img/barangay.png" alt="Logo" class="">
         </div>
 
         <?php if (!empty($error)) : ?>

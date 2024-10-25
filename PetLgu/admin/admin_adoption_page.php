@@ -1,7 +1,7 @@
 <?php
-session_start();
-include ('dbconn/config.php');
-include 'dbconn/authentication.php';
+include('dbconn/config.php');
+include('dbconn/authentication.php');
+checkAccess('admin'); 
 
 
 ?>

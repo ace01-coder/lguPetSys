@@ -1,7 +1,7 @@
 <?php
-
 include('dbconn/config.php');
-
+include('dbconn/authentication.php');
+checkAccess('admin'); 
 
 ?>
 

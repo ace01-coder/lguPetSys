@@ -2,6 +2,7 @@
 session_start();
 include('dbconn/config.php');
 
+
 if (isset($_POST['createAccount'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];

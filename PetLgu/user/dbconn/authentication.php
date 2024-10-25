@@ -1,7 +1,19 @@
 <?php
-// Check if the user is logged in
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    // Redirect to the login page
-    header("Location: index.php");
-    exit();
+function checkAccess($requiredRole) {
+    session_start();
+
+    // Check if the user is logged in
+    if (!isset($_SESSION['user_id'])) {
+        // Redirect to login page if not logged in
+        header("Location: \LGU\index.php");
+        exit();
+    }
+
+    // Check if the logged-in user has the required role
+    if ($_SESSION['role'] !== $requiredRole) {
+        // Redirect to error page if the role doesn't match
+        header("Location: \LGU\index.php");
+        exit();
+    }
 }
+?>
