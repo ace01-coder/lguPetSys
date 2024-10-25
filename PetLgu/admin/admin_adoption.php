@@ -35,7 +35,7 @@ checkAccess('admin');
     <main id="mainContent" class="w-full">
     <div class="flex justify-center bg-white shadow-md rounded-lg p-6">
     <div class="w-full">
-        <h2 class="text-xl font-semibold mb-4 text-center"><i class="fas fa-user w-5 h-5 mr-2"></i>Report Management</h2>
+        <h2 class="text-xl font-semibold mb-4 text-center"><i class="fas fa-user w-5 h-5 mr-2"></i>Adoption Management</h2>
         <div class="flex justify-between py-4">
             <div class="">
                 <input class="border p-2 rounded-lg" type="text" placeholder="Search...">

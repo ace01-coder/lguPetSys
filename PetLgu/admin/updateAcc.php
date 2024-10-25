@@ -35,7 +35,7 @@ if (isset($_POST['updateAccount'])) {
     if ($stmt->execute()) {
         echo "<script>
                 alert('Account updated successfully ');
-                window.location.href = 'admin_account_page.php';
+                window.location.href = 'admin_acc.php';
                 </script>";
     } else {
         echo "Error: " . $stmt->error;

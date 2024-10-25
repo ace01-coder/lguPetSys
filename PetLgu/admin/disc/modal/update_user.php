@@ -2,7 +2,7 @@
 <div id="updateAccountModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 hidden">
   <div class="bg-white rounded-lg w-1/3 p-6">
     <h2 class="text-xl font-semibold mb-4">Update Account</h2>
-    <form action="updateAccount_function.php" method="POST">
+    <form action="updateAcc.php" method="POST">
       <input type="hidden" id="updateUserId" name="id">
       
       <!-- Username -->

@@ -18,7 +18,7 @@ if (isset($_POST['delete'])) {
     $stmt->close();
 
     // Redirect back to index.php
-    header("Location: admin_account_page.php");
+    header("Location: admin_acc.php");
     exit;
 }
 

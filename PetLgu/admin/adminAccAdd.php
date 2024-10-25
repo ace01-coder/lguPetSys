@@ -21,7 +21,7 @@ if (isset($_POST['createAccount'])) {
     if ($stmt->execute()) {
         echo "<script>
         alert('Account created successfully ');
-        window.location.href = 'admin_account_page.php';
+        window.location.href = 'admin_acc.php';
         </script>";
     } else {
         echo "Error: " . $stmt->error;
