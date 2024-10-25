@@ -60,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
                 // Redirect based on role
                 if ($role === 'admin') {
-                    header("Location: PetLgu/admin/admin_dashboard.php");
+                    header("Location: admin/admin_dashboard.php");
                     exit;
                 } elseif ($role === 'user') {
-                    header("Location: PetLgu/user/user_dashboard.php");
+                    header("Location: user/user_dashboard.php");
                     exit;
                 } else {
                     $error['role'] = 'No Account.Please request account to barangay';
