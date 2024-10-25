@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class="flex items-center justify-center h-screen ">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div class="flex justify-center">
-            <img src="PetLgu/admin/img/barangay.png" alt="Logo" class="">
+            <img src="admin/img/barangay.png" alt="Logo" class="">
         </div>
 
         <?php if (!empty($error)) : ?>
