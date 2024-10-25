@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($error)) {
         // Check if the account exists
         $stmt = $conn->prepare('SELECT id, username, pwd, role FROM users WHERE username=? OR email=?');
-        $stmt->bind_param('ss', $umail, $umail, );
+        $stmt->bind_param('ss', $umail, $umail );
         $stmt->execute();
         $stmt->store_result();
 
@@ -60,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
                 // Redirect based on role
                 if ($role === 'admin') {
-                    header("Location: PetLgu/admin/admin_dashboard_page.php");
+                    header("Location: PetLgu/admin/admin_dashboard.php");
                     exit;
                 } elseif ($role === 'user') {
-                    header("Location: PetLgu/user/user_dashboard_page.php");
+                    header("Location: PetLgu/user/user_dashboard.php");
                     exit;
                 } else {
                     $error['role'] = 'No Account.Please request account to barangay';

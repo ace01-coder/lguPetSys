@@ -91,9 +91,9 @@ if ($result->num_rows > 0) {
 
   <!-- Modal Form -->
   <?php
-  include('disc/modal/add_user_account.php');
-  include('disc/modal/update_user_account.php');
-  include('disc/modal/delete_user_account.php');
+  include('disc/modal/add_user.php');
+  include('disc/modal/update_user');
+  include('disc/modal/delete_user');
   ?>
 
 
